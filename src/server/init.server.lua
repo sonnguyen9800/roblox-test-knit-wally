@@ -1,11 +1,7 @@
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 
-Knit.Start():catch(warn)
 
-for _, module in pairs(script:GetChildren()) do
-    local loadMod = coroutine.create(function()
-        require(module);
-    end)
-
-    coroutine.resume(loadMod);
-end
+Knit.AddServices(script.Parent.Services)
+Knit.Start():andThen(function()
+	warn("Server Started")
+end):catch(warn)
